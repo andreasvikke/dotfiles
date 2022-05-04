@@ -1,0 +1,31 @@
+[user]
+	email = azv@efio.dk
+	name = Andreas Vikke
+[credential]
+	helper = store
+[core]
+	excludesfile = ~/.gitignore
+	editor = code --wait
+[color]
+    branch = auto
+    diff = auto
+    status = auto
+[alias]
+	a = add -A
+    s = status -s
+	co = checkout
+    cob = checkout -b
+	cm = commit -m
+	ri = rebase --interactive
+	f = fetch
+	pu = push
+	pub = "!git push -u origin $(git branch-name)"
+	wipr = for-each-ref --sort='committerdate:iso8601' --format=' %(color:yellow)%(committerdate:relative)%09%(color:white)%(refname:short)' refs/remotes/origin
+    wip = for-each-ref --sort='committerdate:iso8601' --format=' %(color:yellow)%(committerdate:relative)%09%(color:white)%(refname:short)' refs/heads/
+[filter "tabspace"]
+	clean = expand --tabs=4 --initial
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
