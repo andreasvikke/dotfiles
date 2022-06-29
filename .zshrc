@@ -109,7 +109,9 @@ source $ZSH/oh-my-zsh.sh
 alias ls="${aliases[ls]:-ls} -A"
 alias g='git'
 alias efio='cd ~/Documents/efio'
-alias av='cd ~/Documents/AndreasVikke'
+alias av='cd ~/Documents/av'
+alias asl='f() { aws sso login --profile $1; export AWS_PROFILE=$1 };f '
+
 
 USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
