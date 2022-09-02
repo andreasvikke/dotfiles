@@ -11,8 +11,16 @@ super + e
 	xdg-open .
 
 # Open Rofi select
-super + space
+super + @space
 	rofi -no-config -no-lazy-grab -show drun -modi drun -theme ~/.config/polybar/colorblocks/scripts/rofi/launcher.rasi
+
+# FN key control
+XF86Audio{Raise,Lower}Volume
+	amixer -D pulse sset Master {5%+,5%-}
+XF86AudioMute
+	amixer -D pulse set Master 1+ toggle
+XF86AudioMicMute
+	amixer set Capture toggle
 
 # make sxhkd reload its configuration files
 alt + Escape
@@ -27,8 +35,8 @@ alt + {_,shift + }Return
 	{st, bspc node -s biggest.local}
  
 # close or kill a window
-alt + {_,shift + }c
-	bspc node -{k,c}
+alt + {c, f4}
+	bspc node -{c,c}
  
 # change the window state
 alt + {t,ctrl + t,l,f}

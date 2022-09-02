@@ -45,6 +45,15 @@ sudo ./aws/install
 rm awscliv2.zip
 rm -rf aws
 
+# Install gcloud cli
+curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-400.0.0-linux-x86_64.tar.gz
+tar -xf google-cloud-cli-400.0.0-linux-x86_64.tar.gz
+sudo cp -r ./google-cloud-sdk ~/bin/
+sudo bash ~/bin/google-cloud-sdk/install.sh --usage-reporting false --command-completion false --path-update false
+sudo ~/bin/google-cloud-sdk/bin/gcloud components install gke-gcloud-auth-plugin --quiet
+rm google-cloud-cli-400.0.0-linux-x86_64.tar.gz
+rm -rf google-cloud-sdk
+
 # Install Polybar Themes
 pip install pywal
 curl "https://raw.githubusercontent.com/firecat53/networkmanager-dmenu/main/networkmanager_dmenu" -o "networkmanager_dmenu"
@@ -71,6 +80,5 @@ cp .zshrc ~/
 cp .gitconfig ~/
 cp -TR ./.config ~/.config
 cp -TR fonts ~/.local/share/fonts
-
 
 echo "Install Script Complete!"
