@@ -10,10 +10,14 @@ killall -q polybar
 # Wait until the processes have been shut down
 while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
-# Find Primary Monitor
-MONITOR=$(polybar -m | grep primary | cut -d":" -f1)
-# Snsert monitor name in config.ini
-sed -i "s/monitor = .*/monitor = $MONITOR/" $DIR/config.ini
+# Set Primary Screen to Second monitor if present
+if xrandr | grep "DP-3 connected"; then
+    MONITOR="DP-3"
+else
+    MONITOR="eDP-1"
+fi
+# Insert monitor name in config.ini
+sed -i "s/monitor = .*/monitor = $MONITOR/g" $DIR/config.ini
 
 # Launch the bar
 polybar -q main -c "$DIR"/config.ini &

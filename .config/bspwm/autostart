@@ -1,1 +1,13 @@
-1password
+#! /bin/sh
+
+# Start these apps on startup
+commands=(
+    "1password"
+    "slack"
+    "lxpolkit"
+	"/usr/bin/gnome-keyring-daemon --start --components=ssh,secrets,pkcs11"
+)
+
+for cmd in "${commands[@]}"; do
+	${cmd} &
+done

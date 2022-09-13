@@ -1,9 +1,20 @@
 #!/bin/bash
 
-bspc wm -O DP-3 eDP-1
+SSH_AUTH_SOCK=/run/user/1000/keyring/ssh
 
-bspc monitor DP-3 -d 1 2 3 4 5
-bspc monitor eDP-1 -d 6 7 8 9 0
+# Set desktops in bspwmrd based on connected montiors
+if xrandr | grep "DP-3 connected"; then
+    bspc wm -O DP-3 eDP-1
+    bspc monitor DP-3 -d 1 2 3 4 5
+    bspc monitor eDP-1 -d 6 7 8 9 0
+else
+    bspc wm -O eDP-1
+    bspc monitor eDP-1 -d 1 2 3 4 5 6 7 8 9 0
+fi
+
+# Launch Polybar
+bash ~/.config/polybar/colorblocks/launch.sh
+picom -b
  
 xsetroot -cursor_name left_ptr
 sxhkd &
@@ -23,11 +34,11 @@ bspc rule -a slack desktop=0
 # Set Background
 feh --bg-center ~/Pictures/Wallpapers/wallpaper.jpeg
 
-# Launch Polybar
-bash ~/.config/polybar/launch.sh --colorblocks
-picom -b
-
 # Dekstop Rules
+bspc rule -a notion-snap desktop=3
 bspc rule -a Slack desktop=5
 bspc rule -a kitty desktop=4
 bspc rule -a Code desktop=^1
+
+# Start autostart script
+bash ~/.config/bspwm/autostart

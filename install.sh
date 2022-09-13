@@ -1,5 +1,5 @@
 sudo apt update
-sudo apt upgrade
+sudo apt upgrade -y
 
 # Install apt packages
 sudo apt install -y zsh kitty build-essential git apt-transport-https ca-certificates \
@@ -7,7 +7,7 @@ sudo apt install -y zsh kitty build-essential git apt-transport-https ca-certifi
 
 # Install Docker
 sudo mkdir -p /etc/apt/keyrings
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor --batch --yes -o /etc/apt/keyrings/docker.gpg
 echo \
   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
@@ -15,7 +15,6 @@ sudo apt-get update
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
 sudo groupadd docker
 sudo gpasswd -a $USER docker
-# newgrp docker
 
 # Install Kubectl
 sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
@@ -82,3 +81,4 @@ cp -TR ./.config ~/.config
 cp -TR fonts ~/.local/share/fonts
 
 echo "Install Script Complete!"
+newgrp docker
