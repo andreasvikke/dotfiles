@@ -29,6 +29,10 @@ alt + Escape
 # quit or restart bspwm
 alt + shift + {q,r}
 	bspc {quit,wm -r}
+
+# move all windows to dekstop 1
+super + shift + {1-9,0}
+	bspc query -N -n .window.!hidden | xargs -I id -n {1-9,10} bspc node id -d {1-9,10}
  
 # create a new terminal window or swap the current one to the biggest one in the screen 
 alt + {_,shift + }Return
@@ -38,12 +42,12 @@ alt + {_,shift + }Return
 alt + {c, f4}
 	bspc node -{c,c}
  
-# change the window state
-alt + {t,ctrl + t,l,f}
-	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+# Change the window state between tiled and fullscreen and hide or show polybar
+alt + {t,f}
+	bspc node -t {tiled,fullscreen} && polybar-msg cmd toggle
  
 # expand a window by moving one of its side outward
-super + alt + {j,k,i,l}
+alt + shift + {j,k,i,l}
 	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
  
 # focus or send a window to the given desktop

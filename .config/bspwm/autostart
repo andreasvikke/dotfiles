@@ -5,9 +5,13 @@ commands=(
     "1password"
     "slack"
     "lxpolkit"
+    "notion-snap"
 	"/usr/bin/gnome-keyring-daemon --start --components=ssh,secrets,pkcs11"
 )
 
 for cmd in "${commands[@]}"; do
-	${cmd} &
+    # Run the command in the background if it's not already running
+    if ! pgrep -f "$cmd" > /dev/null; then
+        $cmd &
+    fi
 done
