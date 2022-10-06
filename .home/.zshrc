@@ -104,10 +104,14 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+alias zshconfig="source ~/.zshrc"
+alias ohmyzsh="source ~/.oh-my-zsh"
 alias ls="${aliases[ls]:-ls} -A"
 alias g='git'
+alias tf='terraform'
+alias k='kubectl'
+alias kx='kubectx'
+alias kn='kubens'
 alias efio='cd ~/Documents/efio'
 alias av='cd ~/Documents/av'
 alias asl='f() { aws sso login --profile $1; export AWS_PROFILE=$1 };f '

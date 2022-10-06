@@ -94,9 +94,7 @@ if [ ! -z "$install" ]; then
 fi
 
 # Setup dotfiles
-cp .p10k.zsh ~/
-cp .zshrc ~/
-cp .gitconfig ~/
+cp -TR ./.home ~/
 cp -TR ./.config ~/.config
 cp -TR fonts ~/.local/share/fonts
 

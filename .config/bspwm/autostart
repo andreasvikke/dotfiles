@@ -6,6 +6,7 @@ commands=(
     "slack"
     "lxpolkit"
     "notion-snap"
+    "dbus-update-activation-environment DISPLAY XAUTHORITY WAYLAND_DISPLAY"
 	"/usr/bin/gnome-keyring-daemon --start --components=ssh,secrets,pkcs11"
 )
 
