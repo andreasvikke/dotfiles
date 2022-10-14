@@ -1,3 +1,5 @@
+#!/usr/bin/zsh
+
 while getopts i: flag
 do
   case "${flag}" in
@@ -90,8 +92,17 @@ if [ ! -z "$install" ]; then
   rm -rf bspwm-rounded
   rm -rf sxhkd
 
+  # Install bsp-layout
+  curl https://raw.githubusercontent.com/phenax/bsp-layout/master/install.sh | bash -;
+
   echo "Installation Complete!"
 fi
+
+# Setup bsp-layout
+for i in {0..9}
+do
+  bsp-layout set tall $i
+done
 
 # Setup dotfiles
 cp -TR ./.home ~/
@@ -100,7 +111,7 @@ cp -TR fonts ~/.local/share/fonts
 
 # Setup docker groups
 sudo groupadd docker
-sudo gpasswd -a $USER docker
+sudo gpasswd -a $USER dockerc
 newgrp docker
 
 echo "Install Script Complete!"
