@@ -20,7 +20,7 @@ XF86Audio{Raise,Lower}Volume
 XF86AudioMute
 	amixer -D pulse set Master 1+ toggle
 XF86AudioMicMute
-	amixer set Capture toggle
+	amixer set Dmic0 toggle
 
 # make sxhkd reload its configuration files
 alt + Escape

@@ -3,9 +3,12 @@
 SSH_AUTH_SOCK=/run/user/1000/keyring/ssh
 
 # Set desktops in bspwmrd based on connected montiors
-if xrandr | grep "DP-3 connected"; then
-    bspc wm -O DP-3 eDP-1
-    bspc monitor DP-3 -d 1 2 3 4 5
+# Find first connected dp monitor
+dp_monitor=$(xrandr | grep ' connected' | grep 'DP' | cut -d ' ' -f1 | head -n 2 | tail -n 1)
+
+if [ $dp_monitor != "eDP-1" ]; then
+    bspc wm -O $dp_monitor eDP-1
+    bspc monitor $dp_monitor -d 1 2 3 4 5
     bspc monitor eDP-1 -d 6 7 8 9 0
 else
     bspc wm -O eDP-1
