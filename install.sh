@@ -39,7 +39,8 @@ if [ ! -z "$install" ]; then
   # Install apt packages
   sudo apt install -y zsh kitty build-essential git apt-transport-https ca-certificates \
     curl traceroute tig gnupg lsb-release network-manager-l2tp-gnome rofi picom pip polybar make \
-    brave-browser 1password docker-ce docker-ce-cli containerd.io docker-compose-plugin kubectl
+    brave-browser 1password docker-ce docker-ce-cli containerd.io docker-compose-plugin kubectl \
+    blueman bluez bluez-tools
 
   # Install Oh My ZSH
   sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"

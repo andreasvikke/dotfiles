@@ -2,17 +2,28 @@
 
 SSH_AUTH_SOCK=/run/user/1000/keyring/ssh
 
-# Set desktops in bspwmrd based on connected montiors
-# Find first connected dp monitor
-dp_monitor=$(xrandr | grep ' connected' | grep 'DP' | cut -d ' ' -f1 | head -n 2 | tail -n 1)
+# Build in monitor = eDP-1
+# External monitor vertical = DP-1 (rotate left)
+# External monitor horizontal = DP-4
+BUILD_IN_MONITOR=eDP-1
+EXTERNAL_MONITOR_V=DP-1
+EXTERNAL_MONITOR_H=DP-3
 
-if [ $dp_monitor != "eDP-1" ]; then
-    bspc wm -O $dp_monitor eDP-1
-    bspc monitor $dp_monitor -d 1 2 3 4 5
-    bspc monitor eDP-1 -d 6 7 8 9 0
-else
-    bspc wm -O eDP-1
-    bspc monitor eDP-1 -d 1 2 3 4 5 6 7 8 9 0
+# If All monitors are connected then use DP-4 5 desktops (1-5) and DP-1 5 desktops (6-10)
+# If only external monitor horizontal is connected then use DP-4 5 desktops (1-5) and eDP-1 5 desktops (6-10)
+# If only build in monitor is connected then use eDP-1 with all 10 desktops (1-10)
+if xrandr | grep "$EXTERNAL_MONITOR_H connected pr" && xrandr | grep "$EXTERNAL_MONITOR_V connected"; then
+    xrandr --output eDP-1 --off --output DP-1 --mode 2560x1440 --rotate left --right-of eDP-1 --output DP-3 --primary --auto --rotate normal --right-of DP-1
+    bspc wm -O $EXTERNAL_MONITOR_H $EXTERNAL_MONITOR_V
+    bspc monitor $EXTERNAL_MONITOR_H -d 1 2 3 4 5
+    bspc monitor $EXTERNAL_MONITOR_V -d 6 7 8 9 10
+elif xrandr | grep "$EXTERNAL_MONITOR_H connected"; then
+    xrandr --output eDP-1 --mode 1920x1200 --rotate normal --output DP-3 --primary --mode 3440x1440 --rotate normal --right-of eDP-1
+    bspc wm -O $EXTERNAL_MONITOR_H $BUILD_IN_MONITOR
+    bspc monitor $EXTERNAL_MONITOR_H -d 1 2 3 4 5
+    bspc monitor $BUILD_IN_MONITOR -d 6 7 8 9 10
+elif xrandr | grep "$BUILD_IN_MONITOR connected"; then
+    bspc monitor $BUILD_IN_MONITOR -d 1 2 3 4 5 6 7 8 9 10
 fi
 
 # Launch Polybar
@@ -48,3 +59,12 @@ bspc rule -a Code desktop=^1
 
 # Start autostart script
 bash ~/.config/bspwm/autostart
+
+# wait for bspwm to start
+# sleep 3
+
+# if [ xrandr | grep "$EXTERNAL_MONITOR_H connected" ] && [ xrandr | grep "$EXTERNAL_MONITOR_V connected" ]; then
+#     xrandr --output eDP-1 --off --output DP-1 --mode 3840x2160 --rotate left --right-of eDP-1 --output DP-3 --primary --mode 3440x1440 --rotate normal --right-of DP-1
+# elif xrandr | grep "$EXTERNAL_MONITOR_H connected"; then
+#     xrandr --output eDP-1 --mode 1920x1200 --rotate normal --output DP-3 --primary --mode 3440x1440 --rotate normal --right-of eDP-1
+# fi

@@ -10,9 +10,11 @@ killall -q polybar
 # Wait until the processes have been shut down
 while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
+dp_monitor=$(xrandr | grep ' connected' | grep 'DP' | cut -d ' ' -f1 | tail -n 1)
+
 # Set Primary Screen to Second monitor if present
-if xrandr | grep "DP-3 connected"; then
-    MONITOR="DP-3"
+if [ $dp_monitor != "eDP-1" ]; then
+    MONITOR=$dp_monitor
 else
     MONITOR="eDP-1"
 fi
