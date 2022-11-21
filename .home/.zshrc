@@ -116,6 +116,12 @@ alias efio='cd ~/Documents/efio'
 alias av='cd ~/Documents/av'
 alias asl='f() { aws sso login --profile $1; export AWS_PROFILE=$1 };f '
 
+# Alias dr <image> <name> <entrypoint> <folder?> to docker run -it --network host (folder exists ? -v <folder>:/app : "") --entrypoint <entrypoint> --name <name> <image>
+alias dr='f() { docker run -it --network host $(if [ -d $4 ]; then echo "-v $4:/app"; fi) --entrypoint $3 --name $2 $1 };f '
+
+
+
+
 
 USE_GKE_GCLOUD_AUTH_PLUGIN=True
 

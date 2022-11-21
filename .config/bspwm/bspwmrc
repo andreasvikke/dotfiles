@@ -6,8 +6,8 @@ SSH_AUTH_SOCK=/run/user/1000/keyring/ssh
 # External monitor vertical = DP-1 (rotate left)
 # External monitor horizontal = DP-4
 BUILD_IN_MONITOR=eDP-1
-EXTERNAL_MONITOR_V=DP-1
-EXTERNAL_MONITOR_H=DP-3
+EXTERNAL_MONITOR_V=HDMI-1
+EXTERNAL_MONITOR_H=HDMI-1
 
 # If All monitors are connected then use DP-4 5 desktops (1-5) and DP-1 5 desktops (6-10)
 # If only external monitor horizontal is connected then use DP-4 5 desktops (1-5) and eDP-1 5 desktops (6-10)
