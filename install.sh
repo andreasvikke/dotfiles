@@ -39,11 +39,12 @@ if [ ! -z "$install" ]; then
   # Install apt packages
   sudo apt install -y zsh kitty build-essential git apt-transport-https ca-certificates \
     curl traceroute tig gnupg lsb-release network-manager-l2tp-gnome rofi picom pip polybar make \
-    brave-browser 1password docker-ce docker-ce-cli containerd.io docker-compose-plugin kubectl \
-    blueman bluez bluez-tools
+    brave-browser 1password 1password-cli docker-ce docker-ce-cli containerd.io docker-compose-plugin kubectl \
+    blueman bluez bluez-tools openconnect make gawk node npm
 
-  # Install Oh My ZSH
+  # Install Oh My ZSH/BASH
   sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
 
   ## Install Powerlevel10k
   git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
@@ -52,7 +53,7 @@ if [ ! -z "$install" ]; then
   yes '' | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
   # Install Brew packages
-  brew install gcc tfswitch kubectx fzf helm derailed/k9s/k9s
+  brew install gcc tfswitch kubectx fzf helm derailed/k9s/k9s pre-commit
 
   # Install snap packagesawscli
   sudo snap install slack
@@ -95,6 +96,8 @@ if [ ! -z "$install" ]; then
 
   # Install bsp-layout
   curl https://raw.githubusercontent.com/phenax/bsp-layout/master/install.sh | bash -;
+
+  sudo npm install -g ajv-cli
 
   echo "Installation Complete!"
 fi

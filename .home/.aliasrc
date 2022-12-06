@@ -1,0 +1,29 @@
+# Folders
+alias efio='cd ~/Documents/efio'
+alias av='cd ~/Documents/av'
+
+# Helpers
+alias c='clear'
+alias ls='ls -A'
+
+# Programs
+alias g='git'
+alias tf='terraform'
+alias k='kubectl'
+alias kx='kubectx'
+alias kn='kubens'
+asl() {
+    aws sso login --profile $1; export AWS_PROFILE=$1
+}
+
+# Docker run image:
+#   Example: dr <image> <name> <entrypoint> <folder?> to docker run -it --network host (folder exists ? -v <folder>:/app : "") --entrypoint <entrypoint> --name <name> <image>
+dr() {
+    docker run -it --network host $(if [ -d $4 ]; then echo "-v $4:/app"; fi) --entrypoint $3 --name $2 $1
+}
+
+# Load rc file for customer:
+#   Example: rc internal
+rc() {
+    source ~/Documents/efio/$1/.rc
+}

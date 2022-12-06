@@ -23,11 +23,12 @@
 	co = checkout
     cob = checkout -b
 	cm = commit -m
-	ri = rebase --interactive
+	rbi = rebase --interactive
 	f = fetch
 	pu = push
 	branch-name = "!git rev-parse --abbrev-ref HEAD"
 	pub = "!git push -u origin $(git branch-name)"
+	subpull = submodule update --init --checkout --recursive
 	wipr = for-each-ref --sort='committerdate:iso8601' --format=' %(color:yellow)%(committerdate:relative)%09%(color:white)%(refname:short)' refs/remotes/origin
     wip = for-each-ref --sort='committerdate:iso8601' --format=' %(color:yellow)%(committerdate:relative)%09%(color:white)%(refname:short)' refs/heads/
 [filter "tabspace"]
