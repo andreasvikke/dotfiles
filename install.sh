@@ -1,9 +1,9 @@
 #!/usr/bin/zsh
 
-while getopts i: flag
+while getopts i flag
 do
   case "${flag}" in
-    i) install=${OPTARG};;
+    i) install=true;
   esac
 done
 
@@ -115,7 +115,7 @@ cp -TR fonts ~/.local/share/fonts
 
 # Setup docker groups
 sudo groupadd docker
-sudo gpasswd -a $USER dockerc
+sudo gpasswd -a $USER docker
 newgrp docker
 
 echo "Install Script Complete!"
