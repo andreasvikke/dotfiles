@@ -21,7 +21,7 @@
 [alias]
 	a = add -A
     s = status -s
-	co = "!bash -c 'if [[ \"$0\" == \"main\" ]] || [[ \"$0\" == \"master\" ]]; then git checkout $(git main-branch); else git checkout $0; fi'"
+	co = checkout
     cob = checkout -b
 	cm = commit -m
 	rbi = rebase --interactive

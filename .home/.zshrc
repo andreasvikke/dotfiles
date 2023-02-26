@@ -25,6 +25,9 @@ export PATH="$PATH:$HOME/bin"
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 export EDITOR=/usr/bin/nano
 
+# Eval direnv
+eval "$(direnv hook zsh)"
+
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f "$HOME/bin/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/bin/google-cloud-sdk/path.zsh.inc"; fi
 
