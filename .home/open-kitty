@@ -1,0 +1,4 @@
+#!/bin/bash
+
+xdotool set_desktop 3
+pgrep -x kitty > /dev/null && xdotool set_desktop 3 || kitty

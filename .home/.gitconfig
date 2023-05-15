@@ -27,6 +27,7 @@
 	rbi = rebase --interactive
 	f = fetch
 	pu = push
+	puf = push --force-with-lease
 	main-branch = "!git symbolic-ref refs/remotes/origin/HEAD | cut -d'/' -f4"
 	branch-name = "!git rev-parse --abbrev-ref HEAD"
 	pub = "!git push -u origin $(git branch-name)"

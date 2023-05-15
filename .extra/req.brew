@@ -1,0 +1,9 @@
+gcc
+warrensbox/tap/tfswitch
+kubectx
+fzf
+helm
+derailed/k9s/k9s
+pre-commit
+terraform-docs
+tflint

@@ -19,6 +19,10 @@ USE_GKE_GCLOUD_AUTH_PLUGIN=True
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 export PATH="$PATH:$HOME/.bin"
 export PATH="$PATH:$HOME/bin"
+export PATH="$PATH:$HOME/.local/bin"
+export PATH="$PATH:/usr/local/go/bin"
+export PATH="$PATH:$HOME/bin/google-cloud-sdk/bin"
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
