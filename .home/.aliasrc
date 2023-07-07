@@ -1,5 +1,5 @@
 # Folders
-alias efio='cd ~/Documents/efio'
+alias thcr='cd ~/Documents/thcr'
 alias av='cd ~/Documents/av'
 
 # Helpers
@@ -20,10 +20,4 @@ asl() {
 #   Example: dr <image> <name> <entrypoint> <folder?> to docker run -it --network host (folder exists ? -v <folder>:/app : "") --entrypoint <entrypoint> --name <name> <image>
 dr() {
     docker run -it --network host $(if [ -d $4 ]; then echo "-v $4:/app"; fi) --entrypoint $3 --name $2 $1
-}
-
-# Load rc file for customer:
-#   Example: rc internal
-rc() {
-    source ~/Documents/efio/$1/.rc
 }

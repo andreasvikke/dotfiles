@@ -51,13 +51,12 @@ if [ ! -z "$install" ]; then
 fi
 
 # Setup dotfiles
-cp -TR ./.home ~/
-cp -TR ./.config ~/.config
+cp -TR ./.home /home/vikke/
+cp -TR ./.config /home/vikke/.config
 
 # Setup docker groups
 groupadd docker
 gpasswd -a $USER docker
-newgrp docker
 
 # setup ubuntu
 dconf load / < .extra/.dconf

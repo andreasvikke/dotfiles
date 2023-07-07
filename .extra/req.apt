@@ -37,3 +37,4 @@ gnome-shell
 gnome-shell-extensions
 chrome-gnome-shell
 gnome-shell-extension-manager
+dbus-x11
