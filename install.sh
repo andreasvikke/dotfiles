@@ -12,16 +12,16 @@ done
 # Install packages
 if [ ! -z "$install" ]; then
   # Install necessary packages for repositories
-  apt update
-  apt install -y apt-transport-https curl gpg lsb-release
+  sudo apt update
+  sudo apt install -y apt-transport-https curl gpg lsb-release
 
-  ./install-repo.sh
+  sudo ./install-repo.sh
 
-  apt update
-  apt upgrade -y
+  sudo apt update
+  sudo apt upgrade -y
 
   # Install apt packages
-  xargs apt install -y < ./.extra/req.apt
+  sudo xargs apt install -y < ./.extra/req.apt
 
   # Install Oh My ZSH
   sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
