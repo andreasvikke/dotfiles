@@ -1,16 +1,17 @@
 #!/bin/bash
+set -e
 
-while getopts icg flag
+while getopts igz flag
 do
   case "${flag}" in
     i) install=true;;
-    c) cli=true;;
     g) gui=true;;
+    z) zsh=true;;
   esac
 done
 
 # Install packages
-if [ ! -z "$install" ]; then
+if [ "$install" ]; then
   # Install necessary packages for repositories
   sudo apt update
   sudo apt install -y apt-transport-https curl gpg lsb-release
@@ -23,28 +24,29 @@ if [ ! -z "$install" ]; then
   # Install apt packages
   sudo xargs apt install -y < ./.extra/req.apt
 
-  # Install Oh My ZSH
-  sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
-  ## Install Powerlevel10k
-  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+  
+  if [ "$zsh" ]; then
+    # Install Oh My ZSH
+    sudo rm -rf /home/vikke/.oh-my-zsh
+    sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  
+    ## Install Powerlevel10k
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+  fi
 
   # Install Homebrew
   yes '' | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
   # Install Brew packages
   xargs brew install < ./.extra/req.brew
 
   # # Install snap packages
-  if [ ! -z "$gui" ]; then
+  if [ "$gui" ]; then
   echo "Installing snap packages"
     while read s; do
-      snap install $s
+      sudo snap install $s
     done < ./.extra/req.snap
-  fi
-
-  if [ ! -z "$cli" ]; then
-    ./install-cli.sh
   fi
 
   echo "Installation Complete!"
@@ -55,10 +57,12 @@ cp -TR ./.home /home/vikke/
 cp -TR ./.config /home/vikke/.config
 
 # Setup docker groups
-groupadd docker
-gpasswd -a $USER docker
+sudo getent group docker || sudo groupadd docker 
+sudo gpasswd -a $USER docker
 
 # setup ubuntu
-dconf load / < .extra/.dconf
+if [ "$gui" ]; then
+  dconf load / < .extra/.dconf
+fi
 
 echo "Install Script Complete!"

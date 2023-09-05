@@ -57,14 +57,6 @@ categories=['X-SuSE-YaST']
 name='suse-yast.directory'
 translate=true
 
-[org/gnome/desktop/background]
-color-shading-type='solid'
-picture-options='zoom'
-picture-uri='file:///home/vikke/.local/share/backgrounds/2023-05-04-14-42-52-abstract.png'
-picture-uri-dark='file:///home/vikke/.local/share/backgrounds/2023-05-04-14-42-52-abstract.png'
-primary-color='#000000000000'
-secondary-color='#000000000000'
-
 [org/gnome/desktop/calendar]
 show-weekdate=false
 
@@ -186,13 +178,6 @@ two-finger-scrolling-enabled=true
 old-files-age=uint32 30
 recent-files-max-age=-1
 report-technical-problems=true
-
-[org/gnome/desktop/screensaver]
-color-shading-type='solid'
-picture-options='zoom'
-picture-uri='file:///home/vikke/.local/share/backgrounds/2023-05-04-14-42-52-abstract.png'
-primary-color='#000000000000'
-secondary-color='#000000000000'
 
 [org/gnome/desktop/search-providers]
 sort-order=['org.gnome.Contacts.desktop', 'org.gnome.Documents.desktop', 'org.gnome.Nautilus.desktop']
@@ -343,100 +328,12 @@ current-workspace-only=false
 [org/gnome/shell/extensions/auto-move-windows]
 application-list=['slack_slack.desktop:5', 'kitty.desktop:4', 'teams-for-linux_teams-for-linux.desktop:5', 'code_code.desktop:1', 'spotify_spotify.desktop:3']
 
-[org/gnome/shell/extensions/aylurs-widgets]
-background-clock=true
-background-clock-date-format='%A %b %d'
-background-clock-date-size=50
-battery-bar=false
-battery-bar-show-icon=false
-battery-bar-show-percentage=true
-battery-bar-width=60
-dash-apps-cols=3
-dash-apps-icon-size=34
-dash-apps-rows=3
-dash-board=true
-dash-board-darken=true
-dash-board-x-align=2
-dash-board-x-offset=0
-dash-board-y-align=2
-dash-board-y-offset=0
-dash-button-enable=false
-dash-clock-background=false
-dash-clock-vertical=false
-dash-clock-width=200
-dash-clock-x-align=0
-dash-clock-x-expand=true
-dash-clock-y-align=0
-dash-hide-activities=true
-dash-layout-json='{"children":[{"vertical":false,"x_align":"FILL","x_expand":true,"children":["clock","settings","system"]},{"vertical":false,"children":[{"vertical":true,"children":["media","links"]},"apps"]},{"vertical":false,"children":["user","levels"]}],"vertical":true}'
-dash-levels-background=true
-dash-levels-vertical=false
-dash-levels-x-align=0
-dash-levels-x-expand=true
-dash-links-icon-size=58
-dash-links-names=['gmail', 'github']
-dash-links-urls=['https://www.fastmail.com/', 'https://www.github.com/']
-dash-links-vertical=false
-dash-media-cover-height=200
-dash-media-cover-width=200
-dash-media-style=1
-dash-read-config=7
-dash-settings-icon-size=34
-dash-settings-vertical=false
-dash-system-background=true
-dash-system-icon-size=34
-dash-system-layout=0
-dash-user-background=false
-dash-user-icon-roundness=99
-dash-user-vertical=true
-dash-user-x-align=2
-dash-user-x-expand=false
-dash-user-y-align=2
-date-menu-date-format='%H:%M | %a %d/%m'
-date-menu-mirror=false
-date-menu-tweaks=true
-dynamic-panel=false
-dynamic-panel-floating-style=true
-dynamic-panel-useless-gaps=10
-media-player=true
-notification-indicator=false
-power-menu=false
-quick-settings-tweaks=true
-stylish-osd=false
-window-headerbar=false
-workspace-indicator=true
-
 [org/gnome/shell/extensions/blur-my-shell/panel]
 blur=false
 
 [org/gnome/shell/extensions/blur]
 brightness=0.55000000000000004
-sigma=0
-
-[org/gnome/shell/extensions/caffeine]
-indicator-position-max=2
-
-[org/gnome/shell/extensions/cpupower]
-cpufreqctl-backend='automatic'
-default-ac-profile=''
-default-battery-profile=''
-frequency-sampling-mode='average'
-profiles=[(10, 10, false, 'Energy Saver', '163316471'), (10, 30, false, 'Quiet', '2127810716'), (20, 80, true, 'Multimedia', '2791977148'), (50, 100, true, 'High Performance', '1742466414')]
-show-arrow-in-taskbar=true
-show-icon-in-taskbar=true
-taskbar-freq-unit-ghz=true
-
-[org/gnome/shell/extensions/dash-to-dock]
-dash-max-icon-size=36
-dock-fixed=false
-dock-position='BOTTOM'
-extend-height=false
-isolate-monitors=false
-isolate-workspaces=false
-show-mounts=true
-show-mounts-network=true
-show-mounts-only-mounted=false
-show-trash=false
+sigma=
 
 [org/gnome/shell/extensions/dash-to-panel]
 animate-appicon-hover=true
@@ -475,34 +372,8 @@ trans-use-dynamic-opacity=false
 tray-padding=8
 window-preview-title-position='TOP'
 
-[org/gnome/shell/extensions/ding]
-show-home=false
-
 [org/gnome/shell/extensions/extension-list]
 hide-disabled=false
-
-[org/gnome/shell/extensions/flypie]
-active-stack-child='menu-editor-page'
-child-color-mode-hover='auto'
-menu-configuration='[{"name":"Example Menu","icon":"flypie-symbolic-#46a","shortcut":"<Primary>space","centered":false,"id":0,"children":[{"name":"Sound","icon":"flypie-multimedia-symbolic-#c86","children":[{"name":"Mute","icon":"flypie-multimedia-mute-symbolic-#853","type":"Shortcut","data":"AudioMute","angle":-1},{"name":"Play / Pause","icon":"flypie-multimedia-playpause-symbolic-#853","type":"Shortcut","data":"AudioPlay","angle":-1},{"name":"Next Title","icon":"flypie-multimedia-next-symbolic-#853","type":"Shortcut","data":"AudioNext","angle":90},{"name":"Previous Title","icon":"flypie-multimedia-previous-symbolic-#853","type":"Shortcut","data":"AudioPrev","angle":270}],"type":"CustomMenu","data":{},"angle":-1},{"name":"Favorites","icon":"flypie-menu-favorites-symbolic-#da3","type":"Favorites","data":{},"angle":-1},{"name":"Next Workspace","icon":"flypie-go-right-symbolic-#6b5","type":"Shortcut","data":{"shortcut":"<Control><Alt>Right"},"angle":-1},{"name":"Maximize Window","icon":"flypie-window-maximize-symbolic-#b68","type":"Shortcut","data":"<Alt>F10","angle":-1},{"name":"Fly-Pie Settings","icon":"flypie-menu-system-symbolic-#3ab","type":"Command","data":"gnome-extensions prefs flypie@schneegans.github.com","angle":-1},{"name":"Close Window","icon":"flypie-window-close-symbolic-#a33","type":"Shortcut","data":"<Alt>F4","angle":-1},{"name":"Previous Workspace","icon":"flypie-go-left-symbolic-#6b5","type":"Shortcut","data":{"shortcut":"<Control><Alt>Left"},"angle":-1},{"name":"Running Apps","icon":"flypie-menu-running-apps-symbolic-#65a","type":"RunningApps","data":{"activeWorkspaceOnly":false,"appGrouping":true,"hoverPeeking":true,"nameRegex":""},"angle":-1}],"type":"CustomMenu","data":{}}]'
-preview-on-right-side=true
-stats-abortions=uint32 16
-stats-achievement-dates={'depth3-click-selector0': int64 1683201304702}
-stats-best-tutorial-time=uint32 548
-stats-click-selections-depth1=uint32 1
-stats-click-selections-depth2=uint32 1
-stats-click-selections-depth3=uint32 22
-stats-dbus-menus=uint32 41
-stats-gesture-selections-depth3=uint32 5
-stats-last-tutorial-time=uint32 3120
-stats-preview-menus=uint32 1
-stats-selections=uint32 29
-stats-selections-1000ms-depth3=uint32 6
-stats-selections-2000ms-depth3=uint32 15
-stats-selections-3000ms-depth3=uint32 19
-stats-selections-750ms-depth3=uint32 4
-stats-settings-opened=uint32 1
-stats-tutorial-menus=uint32 40
 
 [org/gnome/shell/extensions/gtile]
 animation=true
@@ -565,18 +436,6 @@ workspace-background-corner-size=0
 workspace-popup=true
 workspace-switcher-size=0
 workspaces-in-app-grid=true
-
-[org/gnome/shell/extensions/panel-osd]
-test-notification=false
-x-pos=96.5
-y-pos=8.0999999999999996
-
-[org/gnome/shell/extensions/vitals]
-hide-icons=false
-
-[org/gnome/shell/extensions/wintile]
-cols=1
-debug=false
 
 [org/gnome/shell/keybindings]
 toggle-application-view=['<Super>space']
