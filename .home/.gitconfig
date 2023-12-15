@@ -1,18 +1,16 @@
 [user]
-	email = azv@efio.dk
-	name = Andreas Vikke
+	email = azv@techchapter.com
+	name = andreasvikke
 	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIIga+4ccYxARCCnv9TR9k/SpDIFZJeMMvEQq4CQk/aM
 [gpg]
 	format = ssh
-[gpg "ssh"]
-	program = /opt/1Password/op-ssh-sign
 [commit]
 	gpgsign = true
 [credential]
 	helper = store
 [core]
 	excludesfile = ~/.gitignore
-	editor = code --wait
+	editor = vim
 	pager = less -FRSX
 [color]
     branch = auto

@@ -24,6 +24,8 @@ export PATH="$PATH:/usr/local/go/bin"
 export PATH="$PATH:$HOME/bin/google-cloud-sdk/bin"
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
+export SSH_AUTH_SOCK="$HOME/.1password/agent.sock"
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"

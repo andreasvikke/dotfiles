@@ -8,7 +8,7 @@ alias ls='ls -A'
 
 # Programs
 alias g='git'
-alias tf='terraform'
+alias tf='tfswitch && terraform'
 alias k='kubectl'
 alias kx='kubectx'
 alias kn='kubens'
