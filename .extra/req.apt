@@ -9,9 +9,14 @@ brave-browser
 build-essential
 ca-certificates
 chrome-gnome-shell
+containerd.io
 curl
 dbus-x11
 direnv
+docker-buildx-plugin
+docker-ce
+docker-ce-cli
+docker-compose-plugin
 gawk
 git
 gnome-shell
@@ -31,5 +36,6 @@ python3-pip
 tig
 tldr
 traceroute
+vim
 xdotool
 zsh

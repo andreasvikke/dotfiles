@@ -57,7 +57,7 @@ fi
 
 # Setup dotfiles
 cp -TR ./.home /home/vikke/
-cp -TR ./.config /home/vikke/.config
+sudo cp -TR ./.extra/common-auth /etc/pam.d/common-auth
 
 # # Setup docker groups
 # sudo getent group docker || sudo groupadd docker 
