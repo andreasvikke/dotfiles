@@ -16,7 +16,6 @@ fi
 
 USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
-export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 export PATH="$PATH:$HOME/.bin"
 export PATH="$PATH:$HOME/bin"
 export PATH="$PATH:$HOME/.local/bin"

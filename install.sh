@@ -41,7 +41,7 @@ if [ "$install" ]; then
   # Install Brew packages
   xargs brew install < ./.extra/req.brew
 
-  # # Install snap packages
+  # Install snap packages
   if [ "$gui" ]; then
     echo "Installing snap packages"
     while read s; do
@@ -51,7 +51,7 @@ if [ "$install" ]; then
     echo "Installing gnome extensions"
     ./install-gnome.sh
   fi
-
+  
   echo "Installation Complete!"
 fi
 
