@@ -13,6 +13,8 @@ alias kubectl="kubecolor"
 alias k='kubectl'
 alias kx='kubectx'
 alias kn='kubens'
+alias bat='batcat'
+alias less='bat'
 asl() {
     aws sso login --profile $1; export AWS_PROFILE=$1
 }
