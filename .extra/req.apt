@@ -26,7 +26,6 @@ gnupg
 google-cloud-cli
 google-cloud-cli-gke-gcloud-auth-plugin
 kitty
-kubectl
 lsb-release
 make
 make

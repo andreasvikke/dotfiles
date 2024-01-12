@@ -3,6 +3,7 @@ fzf
 gcc
 helm
 krew
+kubecolor/tap/kubecolor
 kubectx
 pre-commit
 terraform-docs
