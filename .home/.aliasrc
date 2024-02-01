@@ -6,6 +6,13 @@ alias av='cd ~/Documents/av'
 alias c='clear'
 alias ls='ls -A'
 
+km() { # $1 new file to use
+    current=$(cat ~/.kube/current)
+    mv ~/.kube/config ~/.kube/config.$current
+    mv ~/.kube/config.$1 ~/.kube/config
+    echo $1 > ~/.kube/current
+}
+
 # Programs
 alias g='git'
 alias tf='tfswitch && terraform'
@@ -15,6 +22,7 @@ alias kx='kubectx'
 alias kn='kubens'
 alias bat='batcat'
 alias less='bat'
+alias lux='~/luxafor'
 asl() {
     aws sso login --profile $1; export AWS_PROFILE=$1
 }
