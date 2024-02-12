@@ -1,8 +1,12 @@
-# Folders
+# ===============
+# === Folders ===
+# ===============
 alias thcr='cd ~/Documents/thcr'
 alias av='cd ~/Documents/av'
 
-# Helpers
+# ===============
+# === Helpers ===
+# ===============
 alias c='clear'
 alias ls='ls -A'
 
@@ -13,7 +17,9 @@ km() { # $1 new file to use
     echo $1 > ~/.kube/current
 }
 
-# Programs
+# ================
+# === Programs ===
+# ================
 alias g='git'
 alias tf='tfswitch && terraform'
 alias kubectl="kubecolor"

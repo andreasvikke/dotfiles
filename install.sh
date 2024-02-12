@@ -1,12 +1,11 @@
 #!/bin/bash
 set -e
 
-while getopts igz flag
+while getopts ig flag
 do
   case "${flag}" in
     i) install=true;;
     g) gui=true;;
-    z) zsh=true;;
   esac
 done
 
@@ -23,16 +22,10 @@ if [ "$install" ]; then
 
   # Install apt packages
   sudo xargs apt install -y < ./.extra/req.apt
-  
-  if [ "$zsh" ]; then
-    # Install Oh My ZSH
-    sudo rm -rf /home/vikke/.oh-my-zsh
-    sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-  fi
 
-  ## Install Powerlevel10k
-  rm -rf ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+  # Install ZSH
+  echo "Installing zsh"
+  ./install-zsh.sh
 
   # Install Homebrew
   yes '' | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -51,6 +44,9 @@ if [ "$install" ]; then
     echo "Installing gnome extensions"
     ./install-gnome.sh
   fi
+
+  # Install Kubescape
+  kubectl krew install kubescape
   
   echo "Installation Complete!"
 fi

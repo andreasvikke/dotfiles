@@ -1,40 +1,50 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+# =========================================
+# === Enable plugins and init oh-my-zsh ===
+# =========================================
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="powerlevel10k/powerlevel10k"
-plugins=(git)
+
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+  [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+fi
+
+plugins=(git zaw zsh-syntax-highlighting zsh-autosuggestions)
 source $ZSH/oh-my-zsh.sh
 
-# Load Alias File
+# =================
+# === Key Binds ===
+# =================
+# CTRL-R will pull up zaw-history (backwards zsh history search)
+bindkey '^r' zaw-history
+# CTRL-B will pull up zaw-git-branches which will search your current git branches and switch (git checkout) to the branch you select when you hit enter.
+bindkey '^b' zaw-git-branches
+
+# =======================
+# === Load Alias File ===
+# =======================
 if [ -f ~/.aliasrc ]; then
   source ~/.aliasrc
 fi
 
-USE_GKE_GCLOUD_AUTH_PLUGIN=True
-
+# ==================
+# === Setup PATH ===
+# ==================
 export PATH="$PATH:$HOME/.bin"
 export PATH="$PATH:$HOME/bin"
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:/usr/local/go/bin"
 export PATH="$PATH:$HOME/bin/google-cloud-sdk/bin"
-export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+export PATH="$PATH:${KREW_ROOT:-$HOME/.krew}/bin"
 
-export SSH_AUTH_SOCK="$HOME/.1password/agent.sock"
+# ===================================
+# === Setup Application specifics ===
+# ===================================
+export SSH_AUTH_SOCK="$HOME/.1password/agent.sock"     # 1password ssh agent
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)" # homebrew
+export EDITOR=/usr/bin/vim                             # default editor
+eval "$(direnv hook zsh)"                              # direnv hook
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-export EDITOR=/usr/bin/nano
-
-# Eval direnv
-eval "$(direnv hook zsh)"
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f "$HOME/bin/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/bin/google-cloud-sdk/path.zsh.inc"; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f "$HOME/bin/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/bin/google-cloud-sdk/completion.zsh.inc"; fi
+export USE_GKE_GCLOUD_AUTH_PLUGIN=True
+if [ -f "$HOME/bin/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/bin/google-cloud-sdk/path.zsh.inc"; fi             # Updates PATH for the Google Cloud SDK.
+if [ -f "$HOME/bin/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/bin/google-cloud-sdk/completion.zsh.inc"; fi # Enables shell command completion for gcloud.
