@@ -1,27 +1,32 @@
 #!/bin/bash
 set -e
 
-while getopts ig flag
+while getopts igm flag
 do
   case "${flag}" in
     i) install=true;;
     g) gui=true;;
+    m) manjaro=true;;
   esac
 done
 
 # Install packages
 if [ "$install" ]; then
-  # Install necessary packages for repositories
-  sudo apt update
-  sudo apt install -y apt-transport-https curl gpg lsb-release
+  if [ "$manjaro" ]; then
+    sudo pacman -Syyu --noconfirm - < ./.extra/req.pacman
+  else
+    # Install necessary packages for repositories
+    sudo apt update
+    sudo apt install -y apt-transport-https curl gpg lsb-release
 
-  sudo ./install-repo.sh
+    sudo ./install-repo.sh
 
-  sudo apt update
-  sudo apt upgrade -y
+    sudo apt update
+    sudo apt upgrade -y
 
-  # Install apt packages
-  sudo xargs apt install -y < ./.extra/req.apt
+    # Install apt packages
+    sudo xargs apt install -y < ./.extra/req.apt
+  fi
 
   # Install ZSH
   echo "Installing zsh"
@@ -36,32 +41,26 @@ if [ "$install" ]; then
 
   # Install snap packages
   if [ "$gui" ]; then
-    echo "Installing snap packages"
-    while read s; do
-      sudo snap install $s
-    done < ./.extra/req.snap
+    if [ "$manjaro" ]; then
+      echo "Installing flatpak packages"
+      while read f; do
+        sudo flatpak install -y --noninteractive $f
+      done < ./.extra/req.flatpak
+    else
+      echo "Installing snap packages"
+      while read s; do
+        sudo snap install $s
+      done < ./.extra/req.snap
+    fi
 
     echo "Installing gnome extensions"
     ./install-gnome.sh
   fi
-
-  # Install Kubescape
-  kubectl krew install kubescape
   
   echo "Installation Complete!"
 fi
 
 # Setup dotfiles
 cp -TR ./.home /home/vikke/
-sudo cp -TR ./.extra/common-auth /etc/pam.d/common-auth
-
-# # Setup docker groups
-# sudo getent group docker || sudo groupadd docker 
-# sudo gpasswd -a $USER docker
-
-# setup ubuntu
-# if [ "$gui" ]; then
-#   dconf load / < .extra/.dconf
-# fi
 
 echo "Install Script Complete!"

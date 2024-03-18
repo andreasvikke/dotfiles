@@ -4,7 +4,6 @@
 sudo rm -rf /home/vikke/.oh-my-zsh
 0>/dev/null sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-
 ## == Plugins ==
 # Install ZAW
 rm -rf ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zaw
@@ -21,3 +20,8 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 # Install Powerlevel10k
 rm -rf ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+
+# Install ata plugin
+wget https://github.com/rikhuijzer/ata/releases/latest/download/ata-x86_64-unknown-linux-gnu
+sudo mv ata-x86_64-unknown-linux-gnu /usr/local/bin/ata
+sudo chmod +x /usr/local/bin/ata
