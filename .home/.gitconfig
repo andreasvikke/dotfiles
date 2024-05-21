@@ -2,6 +2,10 @@
 	email = azv@techchapter.com
 	name = andreasvikke
 	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIIga+4ccYxARCCnv9TR9k/SpDIFZJeMMvEQq4CQk/aM
+[includeIf "gitdir:~/Documents/av/"]
+	path = ~/Documents/av/.gitconfig
+[includeIf "gitdir:~/Documents/konolico/"]
+	path = ~/Documents/konolico/.gitconfig
 [gpg]
 	format = ssh
 [commit]

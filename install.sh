@@ -13,6 +13,14 @@ done
 # Install packages
 if [ "$install" ]; then
   if [ "$manjaro" ]; then
+    sudo pacman -Syyu --noconfirm git
+
+    git clone https://github.com/aurutils/aurutils.git
+    cd aurutils/makepkg
+    sudo makepkg -srci --noconfirm
+    cd ../..
+    rm -rf aurutils
+    
     sudo pacman -Syyu --noconfirm - < ./.extra/req.pacman
   else
     # Install necessary packages for repositories
