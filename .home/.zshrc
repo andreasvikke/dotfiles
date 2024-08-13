@@ -43,3 +43,5 @@ eval "$(direnv hook zsh)"                              # direnv hook
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 if [ -f "$HOME/bin/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/bin/google-cloud-sdk/path.zsh.inc"; fi             # Updates PATH for the Google Cloud SDK.
 if [ -f "$HOME/bin/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/bin/google-cloud-sdk/completion.zsh.inc"; fi # Enables shell command completion for gcloud.
+
+eval "$(starship init zsh)"
