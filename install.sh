@@ -1,28 +1,32 @@
 #!/bin/bash
 set -e
 
-while getopts igm flag
+while getopts ig flag
 do
   case "${flag}" in
     i) install=true;;
     g) gui=true;;
-    m) manjaro=true;;
   esac
 done
 
 # Install packages
 if [ "$install" ]; then
-  if [ "$manjaro" ]; then
-    sudo pacman -Syyu --noconfirm git
+  distro=$(cat /etc/os-release | grep -w ID | cut -d= -f2)
 
-    git clone https://github.com/aurutils/aurutils.git
-    cd aurutils/makepkg
-    sudo makepkg -srci --noconfirm
-    cd ../..
-    rm -rf aurutils
-    
+  if [ "$distro" == "manjaro" ]; then
+    # Install necessary packages for repositories   
     sudo pacman -Syyu --noconfirm - < ./.extra/req.pacman
-  else
+    # Install gui packages
+    if [ "$gui" ]; then
+      echo "Installing flatpak packages"
+      while read f; do
+        sudo flatpak install -y --noninteractive $f
+      done < ./.extra/req.flatpak
+
+      echo "Installing gnome extensions and setting up gnome keybindings"
+      ./install-gnome.sh
+    fi
+  elif [ "$distro" == "ubuntu" ]; then
     # Install necessary packages for repositories
     sudo apt update
     sudo apt install -y apt-transport-https curl gpg lsb-release
@@ -34,6 +38,19 @@ if [ "$install" ]; then
 
     # Install apt packages
     sudo xargs apt install -y < ./.extra/req.apt
+    # Install gui packages
+    if [ "$gui" ]; then
+      echo "Installing snap packages"
+      while read s; do
+        sudo snap install $s
+      done < ./.extra/req.snap
+
+      echo "Installing gnome extensions and setting up gnome keybindings"
+      ./install-gnome.sh
+    fi
+  else
+    echo "Unsupported distro: $distro"
+    exit 1
   fi
 
   # Install ZSH
@@ -46,29 +63,11 @@ if [ "$install" ]; then
 
   # Install Brew packages
   xargs brew install < ./.extra/req.brew
-
-  # Install snap packages
-  if [ "$gui" ]; then
-    if [ "$manjaro" ]; then
-      echo "Installing flatpak packages"
-      while read f; do
-        sudo flatpak install -y --noninteractive $f
-      done < ./.extra/req.flatpak
-    else
-      echo "Installing snap packages"
-      while read s; do
-        sudo snap install $s
-      done < ./.extra/req.snap
-    fi
-
-    echo "Installing gnome extensions"
-    ./install-gnome.sh
-  fi
   
   echo "Installation Complete!"
 fi
 
 # Setup dotfiles
-cp -TR ./.home /home/vikke/
+cp -TR ./.home ~/
 
 echo "Install Script Complete!"

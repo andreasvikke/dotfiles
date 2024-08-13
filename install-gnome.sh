@@ -14,3 +14,12 @@ while read i; do
     gnome-extensions enable ${i}
     rm ${i}.zip
 done < ./.extra/req.gnome
+
+for i in {1..5}
+do
+    gsettings set "org.gnome.desktop.wm.keybindings" "switch-to-workspace-$i" "['<Alt>$i']"
+    gsettings set "org.gnome.desktop.wm.keybindings" "move-to-workspace-$i" "['<Shift><Alt>$i']"
+done
+
+gsettings set "org.gnome.desktop.wm.keybindings" "close" "['<Alt>c']"
+gsettings set "org.gnome.settings-daemon.plugins.media-keys" "home" "['<Super>e']"
