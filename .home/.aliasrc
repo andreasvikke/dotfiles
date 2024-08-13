@@ -21,21 +21,17 @@ km() { # $1 new file to use
 # ================
 # === Programs ===
 # ================
+alias cat='bat --theme=Nord'
 alias g='git'
-alias tf='tfswitch && terraform'
-alias kubectl="kubecolor"
+alias htop='btop'
 alias k='kubectl'
-alias kx='kubectx'
 alias kn='kubens'
-alias bat='batcat'
+alias kubectl='kubecolor'
+alias kx='kubectx'
 alias less='bat'
+alias ls='exa -la'
 alias lux='~/luxafor'
+alias tf='tfswitch && terraform'
 asl() {
     aws sso login --profile $1; export AWS_PROFILE=$1
-}
-
-# Docker run image:
-#   Example: dr <image> <name> <entrypoint> <folder?> to docker run -it --network host (folder exists ? -v <folder>:/app : "") --entrypoint <entrypoint> --name <name> <image>
-dr() {
-    docker run -it --network host $(if [ -d $4 ]; then echo "-v $4:/app"; fi) --entrypoint $3 --name $2 $1
 }

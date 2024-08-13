@@ -36,8 +36,7 @@
 	subpull = submodule update --init --checkout --recursive
 	wipr = for-each-ref --sort='committerdate:iso8601' --format=' %(color:yellow)%(committerdate:relative)%09%(color:white)%(refname:short)' refs/remotes/origin
     wip = for-each-ref --sort='committerdate:iso8601' --format=' %(color:yellow)%(committerdate:relative)%09%(color:white)%(refname:short)' refs/heads/
-	ls = "!bash -c 'git log --since \"$0\" --until \"$1\" '"
-	lsf = "!bash -c 'git log --since \"$0\" --until \"$1\" --pretty=format:\"%C(Yellow)%h%Creset %C(Green)%ad%Creset %<(15,trunc)%C(Red)%an%Creset %s\" '"
+	ls = log --oneline
 [filter "tabspace"]
 	clean = expand --tabs=4 --initial
 [filter "lfs"]

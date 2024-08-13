@@ -6,7 +6,9 @@ ca-certificates
 curl
 direnv
 docker
+docker-buildx
 docker-compose
+exa
 file
 gawk
 git
@@ -16,9 +18,11 @@ gnome-shell-extensions
 gnome-tweaks
 jq
 kitty
+otf-firamono-nerd
 procps-ng
 tig
 tldr
 traceroute
+ttf-firacode-nerd
 vim
 zsh
