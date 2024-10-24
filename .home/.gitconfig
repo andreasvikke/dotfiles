@@ -6,6 +6,8 @@
 	path = ~/Documents/av/.gitconfig
 [includeIf "gitdir:~/Documents/konolico/"]
 	path = ~/Documents/konolico/.gitconfig
+[includeIf "gitdir:~/Documents/ufst/"]
+	path = ~/Documents/ufst/.gitconfig
 [gpg]
 	format = ssh
 [commit]

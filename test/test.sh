@@ -18,9 +18,9 @@ if [ "$manjaro" ]; then
         -v ./src:/test/ \
         --network host \
         manjarolinux/base:latest \
-        /bin/bash -c 'cd /test; ./install.sh -i -m'
+        /bin/bash -c 'cd /test; ./install.sh -i'
 else
-    echo "Testing on Manjaro"
+    echo "Testing on Ubuntu"
     docker run --rm  \
         -v ./src:/test/ \
         --network host \
@@ -29,4 +29,3 @@ else
 fi
 
 rm -rf ./src
-    

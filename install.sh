@@ -1,11 +1,10 @@
 #!/bin/bash
 set -e
 
-while getopts ig flag
-do
+while getopts ig flag; do
   case "${flag}" in
-    i) install=true;;
-    g) gui=true;;
+  i) install=true ;;
+  g) gui=true ;;
   esac
 done
 
@@ -14,26 +13,9 @@ if [ "$install" ]; then
   distro=$(cat /etc/os-release | grep -w ID | cut -d= -f2)
 
   if [ "$distro" == "manjaro" ]; then
-    # Install necessary packages for repositories   
-    sudo pacman -Syyu --noconfirm - < ./.extra/req.pacman
-    yay -Syyu --noconfirm - < ./.extra/req.aur
-
-    # Install gui packages
-    if [ "$gui" ]; then
-      echo "Installing flatpak packages"
-      while read f; do
-        sudo flatpak install -y --noninteractive $f
-      done < ./.extra/req.flatpak
-
-      echo "Installing gnome extensions and setting up gnome keybindings"
-      ./install-gnome.sh
-
-      echo "Setting GTK theme"
-      GTK='GTK_THEME="Nordic"'
-      if ! grep -Fxq "$GTK" /etc/environment; then
-        echo "$GTK" | sudo tee -a /etc/environment
-      fi
-    fi
+    # Install necessary packages for repositories
+    sudo pacman -Syyu --noconfirm - <./.extra/req.pacman
+    yay -Syyu --noconfirm - <./.extra/req.aur
   elif [ "$distro" == "ubuntu" ]; then
     # Install necessary packages for repositories
     sudo apt update
@@ -45,21 +27,41 @@ if [ "$install" ]; then
     sudo apt upgrade -y
 
     # Install apt packages
-    sudo xargs apt install -y < ./.extra/req.apt
+    sudo xargs apt install -y <./.extra/req.apt
+  else
+    echo "Unsupported distro: $distro"
+    exit 1
+  fi
 
-    # Install gui packages
-    if [ "$gui" ]; then
+  # Install gui packages
+  if [ "$gui" ]; then
+    if [ "$distro" == "manjaro" ]; then
+      echo "Installing flatpak packages"
+      while read f; do
+        sudo flatpak install -y --noninteractive $f
+      done <./.extra/req.flatpak
+
+      echo "Installing GUI aur"
+      sudo pacman -Syyu --noconfirm - <./.extra/req.pacman.gui
+      yay -Syyu --noconfirm - <./.extra/req.aur.gui
+
+      echo "Installing gnome extensions and setting up gnome keybindings"
+      ./install-gnome.sh
+
+      echo "Setting GTK theme"
+      GTK='GTK_THEME="Nordic"'
+      if ! grep -Fxq "$GTK" /etc/environment; then
+        echo "$GTK" | sudo tee -a /etc/environment
+      fi
+    elif [ "$distro" == "ubuntu" ]; then
       echo "Installing snap packages"
       while read s; do
         sudo snap install $s
-      done < ./.extra/req.snap
+      done <./.extra/req.snap
 
       echo "Installing gnome extensions and setting up gnome keybindings"
       ./install-gnome.sh
     fi
-  else
-    echo "Unsupported distro: $distro"
-    exit 1
   fi
 
   # Install ZSH
@@ -71,8 +73,8 @@ if [ "$install" ]; then
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
   # Install Brew packages
-  xargs brew install < ./.extra/req.brew
-  
+  xargs brew install <./.extra/req.brew
+
   echo "Installation Complete!"
 fi
 

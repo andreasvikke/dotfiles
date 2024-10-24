@@ -1,7 +1,6 @@
 aws-cli
 base-devel
 bat
-brave-browser
 ca-certificates
 curl
 direnv
@@ -12,19 +11,13 @@ exa
 file
 gawk
 git
-gnome-browser-connector
-gnome-shell
-gnome-shell-extensions
-gnome-tweaks
 jq
-kitty
 otf-firamono-nerd
 procps-ng
 starship
 tig
 tldr
 traceroute
-ttf-firacode-nerd
 vim
 yay
 zsh
