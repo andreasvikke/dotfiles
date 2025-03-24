@@ -9,9 +9,8 @@ while getopts ig flag; do
 done
 
 # Install packages
+distro=$(cat /etc/os-release | grep -w ID | cut -d= -f2)
 if [ "$install" ]; then
-  distro=$(cat /etc/os-release | grep -w ID | cut -d= -f2)
-
   if [ "$distro" == "manjaro" ]; then
     # Install necessary packages for repositories
     sudo pacman -Syyu --noconfirm - <./.extra/req.pacman
@@ -36,11 +35,6 @@ if [ "$install" ]; then
   # Install gui packages
   if [ "$gui" ]; then
     if [ "$distro" == "manjaro" ]; then
-      echo "Installing flatpak packages"
-      while read f; do
-        sudo flatpak install -y --noninteractive $f
-      done <./.extra/req.flatpak
-
       echo "Installing GUI aur"
       sudo pacman -Syyu --noconfirm - <./.extra/req.pacman.gui
       yay -Syyu --noconfirm - <./.extra/req.aur.gui
@@ -62,18 +56,15 @@ if [ "$install" ]; then
       echo "Installing gnome extensions and setting up gnome keybindings"
       ./install-gnome.sh
     fi
+    fi
   fi
 
+# Non distro specific
+if [ "$install" ]; then
   # Install ZSH
   echo "Installing zsh"
   ./install-zsh.sh
 
-  # Install Homebrew
-  yes '' | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-
-  # Install Brew packages
-  xargs brew install <./.extra/req.brew
 
   echo "Installation Complete!"
 fi

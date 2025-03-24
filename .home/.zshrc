@@ -36,7 +36,6 @@ export PATH="$PATH:${KREW_ROOT:-$HOME/.krew}/bin"
 # === Setup Application specifics ===
 # ===================================
 export SSH_AUTH_SOCK="$HOME/.1password/agent.sock"     # 1password ssh agent
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)" # homebrew
 export EDITOR=/usr/bin/vim                             # default editor
 eval "$(direnv hook zsh)"                              # direnv hook
 
