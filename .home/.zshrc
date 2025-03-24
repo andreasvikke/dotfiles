@@ -2,6 +2,7 @@
 # === Enable plugins and init oh-my-zsh ===
 # =========================================
 export ZSH="$HOME/.oh-my-zsh"
+export ZSH_COMPDUMP=$ZSH/cache/.zcompdump-$HOST
 ZSH_THEME=""
 
 plugins=(git zaw zsh-syntax-highlighting)

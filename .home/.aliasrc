@@ -18,20 +18,22 @@ km() { # $1 new file to use
     echo $1 > ~/.kube/current
 }
 
+alias swiss='kubectl run tmp-shell --rm -it --image nicolaka/netshoot -- /bin/zsh'
+
 # ================
 # === Programs ===
 # ================
-alias cat='bat --theme=Nord'
 alias g='git'
 alias htop='btop'
 alias k='kubectl'
 alias kn='kubens'
 alias kubectl='kubecolor'
 alias kx='kubectx'
-alias less='bat'
+alias less='bat --theme=Nord'
 alias ls='exa -la'
 alias lux='~/luxafor'
 alias tf='tfswitch && terraform'
+alias find='fd'
 asl() {
     aws sso login --profile $1; export AWS_PROFILE=$1
 }
