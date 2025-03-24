@@ -56,8 +56,8 @@ if [ "$install" ]; then
       echo "Installing gnome extensions and setting up gnome keybindings"
       ./install-gnome.sh
     fi
-    fi
   fi
+fi
 
 # Non distro specific
 if [ "$install" ]; then
@@ -65,6 +65,17 @@ if [ "$install" ]; then
   echo "Installing zsh"
   ./install-zsh.sh
 
+  disabled=$(sudo ufw status | grep -o "Status: inactive")
+
+  if [ "$disabled" ]; then
+    echo "Setting up default ufw"
+    sudo ufw enable
+    sudo ufw default deny incoming
+    sudo ufw default allow outgoing
+  fi
+
+  sudo mkdir -p /etc/docker
+  echo '{"iptables":false}' | sudo tee /etc/docker/daemon.json
 
   echo "Installation Complete!"
 fi
