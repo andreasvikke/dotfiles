@@ -1,10 +1,11 @@
 #!/bin/bash
 set -e
 
-while getopts ig flag; do
+while getopts igm flag; do
   case "${flag}" in
   i) install=true ;;
   g) gui=true ;;
+  m) gnome=true ;;
   esac
 done
 
@@ -12,9 +13,11 @@ done
 distro=$(cat /etc/os-release | grep -w ID | cut -d= -f2)
 if [ "$install" ]; then
   if [ "$distro" == "manjaro" ]; then
+    sudo pacman-mirrors --geoip && sudo pacman -Syyu --noconfirm
     # Install necessary packages for repositories
-    sudo pacman -Syyu --noconfirm - <./.extra/req.pacman
-    yay -Syyu --noconfirm - <./.extra/req.aur
+    sudo pacman -S --needed --noconfirm - <./.extra/req.pacman
+    echo "Test"
+    # yay -S --needed --noconfirm - <./.extra/req.aur
   elif [ "$distro" == "ubuntu" ]; then
     # Install necessary packages for repositories
     sudo apt update
@@ -36,9 +39,16 @@ if [ "$install" ]; then
   if [ "$gui" ]; then
     if [ "$distro" == "manjaro" ]; then
       echo "Installing GUI aur"
-      sudo pacman -Syyu --noconfirm - <./.extra/req.pacman.gui
-      yay -Syyu --noconfirm - <./.extra/req.aur.gui
+      sudo pacman -S --needed --noconfirm - <./.extra/req.pacman.gui
+      yay -S --needed --noconfirm - <./.extra/req.aur.gui
+    elif [ "$distro" == "ubuntu" ]; then
+      echo "Installing snap packages"
+      while read s; do
+        sudo snap install $s
+      done <./.extra/req.snap
+    fi
 
+    if [ "$gnome" ]; then
       echo "Installing gnome extensions and setting up gnome keybindings"
       ./install-gnome.sh
 
@@ -47,14 +57,6 @@ if [ "$install" ]; then
       if ! grep -Fxq "$GTK" /etc/environment; then
         echo "$GTK" | sudo tee -a /etc/environment
       fi
-    elif [ "$distro" == "ubuntu" ]; then
-      echo "Installing snap packages"
-      while read s; do
-        sudo snap install $s
-      done <./.extra/req.snap
-
-      echo "Installing gnome extensions and setting up gnome keybindings"
-      ./install-gnome.sh
     fi
   fi
 fi
@@ -65,14 +67,10 @@ if [ "$install" ]; then
   echo "Installing zsh"
   ./install-zsh.sh
 
-  disabled=$(sudo ufw status | grep -o "Status: inactive")
-
-  if [ "$disabled" ]; then
-    echo "Setting up default ufw"
-    sudo ufw enable
-    sudo ufw default deny incoming
-    sudo ufw default allow outgoing
-  fi
+  echo "Setting up default ufw"
+  sudo ufw enable
+  sudo ufw default deny incoming
+  sudo ufw default allow outgoing
 
   sudo mkdir -p /etc/docker
   echo '{"iptables":false}' | sudo tee /etc/docker/daemon.json

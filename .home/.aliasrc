@@ -24,6 +24,7 @@ alias swiss='kubectl run tmp-shell --rm -it --image nicolaka/netshoot -- /bin/zs
 # === Programs ===
 # ================
 alias g='git'
+alias vi='git'
 alias htop='btop'
 alias k='kubectl'
 alias kn='kubens'

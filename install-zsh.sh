@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Install Oh My ZSH
-sudo rm -rf /home/vikke/.oh-my-zsh
+sudo rm -rf ~/.oh-my-zsh
 0>/dev/null sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 ## == Plugins ==
