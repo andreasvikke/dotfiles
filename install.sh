@@ -1,11 +1,12 @@
 #!/bin/bash
 set -e
 
-while getopts igm flag; do
+while getopts igmh flag; do
   case "${flag}" in
   i) install=true ;;
   g) gui=true ;;
   m) gnome=true ;;
+  h) hyprland=true ;;
   esac
 done
 
@@ -16,8 +17,7 @@ if [ "$install" ]; then
     sudo pacman-mirrors --geoip && sudo pacman -Syyu --noconfirm
     # Install necessary packages for repositories
     sudo pacman -S --needed --noconfirm - <./.extra/req.pacman
-    echo "Test"
-    # yay -S --needed --noconfirm - <./.extra/req.aur
+    yay -S --needed --noconfirm - <./.extra/req.aur
   elif [ "$distro" == "ubuntu" ]; then
     # Install necessary packages for repositories
     sudo apt update
@@ -51,14 +51,24 @@ if [ "$install" ]; then
     if [ "$gnome" ]; then
       echo "Installing gnome extensions and setting up gnome keybindings"
       ./install-gnome.sh
-
-      echo "Setting GTK theme"
-      GTK='GTK_THEME="Nordic"'
-      if ! grep -Fxq "$GTK" /etc/environment; then
-        echo "$GTK" | sudo tee -a /etc/environment
-      fi
     fi
   fi
+fi
+
+# Install hyprland
+if [ "$hyprland" ]; then
+  echo "Installing Hyperland and dependencies"
+  sudo pacman -S --needed --noconfirm - <./.extra/req.pacman.hypr
+  yay -S --needed --noconfirm - <./.extra/req.aur.hypr
+
+  # Setup PAM hook (login + SDDM)"
+  sudo sed -i \
+    '/^auth[[:space:]]\+include[[:space:]]\+system-auth/ a auth       optional   pam_gnome_keyring.so' \
+    /etc/pam.d/system-login
+
+  sudo sed -i \
+    '/^session[[:space:]]\+include[[:space:]]\+system-auth/ a session    optional   pam_gnome_keyring.so auto_start' \
+    /etc/pam.d/system-login
 fi
 
 # Non distro specific

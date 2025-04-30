@@ -1,6 +1,7 @@
 aws-cli
 base-devel
 bat
+bind
 btop
 ca-certificates
 curl
@@ -16,11 +17,13 @@ fzf
 gawk
 git
 helm
+iwd
 jq
 kubectx
 otf-firamono-nerd
 pre-commit
 procps-ng
+sshuttle
 starship
 tflint
 tig
@@ -33,3 +36,4 @@ wget
 yay
 zsh
 zstd
+superfile
