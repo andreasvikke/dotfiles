@@ -10,6 +10,8 @@
 	path = ~/Documents/ufst/.gitconfig
 [gpg]
 	format = ssh
+[gpg "ssh"]
+  program = "/opt/1Password/op-ssh-sign"
 [commit]
 	gpgsign = true
 [credential]

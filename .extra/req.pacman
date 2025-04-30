@@ -16,11 +16,13 @@ fzf
 gawk
 git
 helm
+iwd
 jq
 kubectx
 otf-firamono-nerd
 pre-commit
 procps-ng
+sshuttle
 starship
 tflint
 tig

@@ -1,0 +1,1 @@
+hyprctl dispatch exec plasmawindowed org.kde.plasma.networkmanagement
