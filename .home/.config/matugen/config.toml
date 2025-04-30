@@ -1,0 +1,30 @@
+[config.wallpaper]
+command = "swww"
+arguments = ["img", "--transition-type", "center"]
+set = true
+
+[templates.hyprland]
+input_path = '~/.config/matugen/templates/hyprland.conf'
+output_path = '~/.config/hypr/colors.conf'
+post_hook = 'hyprctl reload'
+
+[templates.kitty]
+input_path = '~/.config/matugen/templates/kitty.conf'
+output_path = '~/.config/kitty/colors.conf'
+post_hook = "kitty @ set-colors -a -c ~/.config/kitty/colors.conf"
+
+[templates.starship]
+input_path = '~/.config/matugen/templates/starship.conf'
+output_path = '~/.config/starship.toml'
+
+[templates.rofi]
+input_path = '~/.config/matugen/templates/rofi.conf'
+output_path = '~/.config/rofi/colors.rasi'
+
+[templates.superfile]
+input_path = '~/.config/matugen/templates/superfile.conf'
+output_path = '~/.config/superfile/theme/matugen.toml'
+
+[templates.wal]
+input_path = '~/.config/matugen/templates/wal.conf'
+output_path = '~/.cache/wal/colors'
