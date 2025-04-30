@@ -1,0 +1,5 @@
+{
+  "terminal.integrated.defaultProfile.linux": "zsh",
+  "terminal.integrated.fontFamily": "FiraMono Nerd Font",
+  "workbench.colorTheme": "Wal"
+}
