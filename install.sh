@@ -5,7 +5,6 @@ while getopts igmh flag; do
   case "${flag}" in
   i) install=true ;;
   g) gui=true ;;
-  m) gnome=true ;;
   h) hyprland=true ;;
   esac
 done
@@ -14,22 +13,13 @@ done
 distro=$(cat /etc/os-release | grep -w ID | cut -d= -f2)
 if [ "$install" ]; then
   if [ "$distro" == "manjaro" ]; then
-    sudo pacman-mirrors --geoip && sudo pacman -Syyu --noconfirm
+    sudo pacman-mirrors --geoip
     # Install necessary packages for repositories
     sudo pacman -S --needed --noconfirm - <./.extra/req.pacman
     yay -S --needed --noconfirm - <./.extra/req.aur
-  elif [ "$distro" == "ubuntu" ]; then
-    # Install necessary packages for repositories
-    sudo apt update
-    sudo apt install -y apt-transport-https curl gpg lsb-release
-
-    sudo ./install-repo.sh
-
-    sudo apt update
-    sudo apt upgrade -y
-
-    # Install apt packages
-    sudo xargs apt install -y <./.extra/req.apt
+    
+    sudo pacman -Syyu --noconfirm
+    sudo yay -Syyu --noconfirm
   else
     echo "Unsupported distro: $distro"
     exit 1
@@ -41,16 +31,6 @@ if [ "$install" ]; then
       echo "Installing GUI aur"
       sudo pacman -S --needed --noconfirm - <./.extra/req.pacman.gui
       yay -S --needed --noconfirm - <./.extra/req.aur.gui
-    elif [ "$distro" == "ubuntu" ]; then
-      echo "Installing snap packages"
-      while read s; do
-        sudo snap install $s
-      done <./.extra/req.snap
-    fi
-
-    if [ "$gnome" ]; then
-      echo "Installing gnome extensions and setting up gnome keybindings"
-      ./install-gnome.sh
     fi
   fi
 fi
@@ -88,6 +68,8 @@ if [ "$install" ]; then
   echo "Installation Complete!"
 fi
 
+# Setup systemd services
+sudo cp -TR ./systemd /etc/systemd/system/
 # Setup dotfiles
 cp -TR ./.home ~/
 

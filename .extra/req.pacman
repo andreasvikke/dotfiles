@@ -25,6 +25,7 @@ pre-commit
 procps-ng
 sshuttle
 starship
+superfile
 tflint
 tig
 tldr
@@ -33,7 +34,7 @@ ttf-firacode-nerd
 ufw
 vim
 wget
+
 yay
 zsh
 zstd
-superfile

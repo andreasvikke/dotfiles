@@ -11,6 +11,7 @@ alias av='cd ~/Documents/av'
 alias c='clear'
 alias ls='ls -A'
 
+# Kube config Move/Replace alias
 km() { # $1 new file to use
     current=$(cat ~/.kube/current)
     mv ~/.kube/config ~/.kube/config.$current
@@ -18,7 +19,24 @@ km() { # $1 new file to use
     echo $1 > ~/.kube/current
 }
 
-alias swiss='kubectl run tmp-shell --rm -it --image nicolaka/netshoot -- /bin/zsh'
+# Talos Cofnig Move/Replace alias
+tm() { # $1 new file to use
+    current=$(cat ~/.talos/current)
+    mv ~/.talos/config ~/.talos/config.$current
+    mv ~/.talos/config.$1 ~/.talos/config
+    echo $1 > ~/.talos/current
+}
+
+swiss() { # $1 node to use
+  if [ -n "$1" ]; then
+    kubectl run tmp-shell --rm -it \
+      --overrides='{"spec":{"nodeSelector":{"kubernetes.io/hostname":"'"$1"'"}}}' \
+      --image nicolaka/netshoot -- /bin/zsh
+  else
+    kubectl run tmp-shell --rm -it \
+      --image nicolaka/netshoot -- /bin/zsh
+  fi
+}
 
 # ================
 # === Programs ===
