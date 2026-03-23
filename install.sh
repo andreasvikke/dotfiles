@@ -3,52 +3,52 @@ set -e
 
 while getopts igmh flag; do
   case "${flag}" in
-  i) install=true ;;
-  g) gui=true ;;
-  h) hyprland=true ;;
+  i) install=true ;;     # Install CLI applications
+  g) gui=true ;;         # Install GUI applications
+  h) hyprland=true ;;    # Install hyprland as window manage
+  p) onepassword=true ;; # Setup 1Password as SSH Agent
   esac
 done
 
 # Install packages
-distro=$(cat /etc/os-release | grep -w ID | cut -d= -f2)
-if [ "$install" ]; then
-  if [ "$distro" == "manjaro" ]; then
-    sudo pacman-mirrors --geoip
-    # Install necessary packages for repositories
+distro=$(cat /etc/os-release | grep -w ID_LIKE | cut -d= -f2)
+if [ "$distro" == "arch" ]; then
+  # Install cli packages
+  if [ "$install" ]; then
+    echo "Installing CLI packages"
+    sudo pacman-mirrors -c Denmark
+    sudo pacman -Syyu --noconfirm
+    yay -Syyu --noconfirm
+
     sudo pacman -S --needed --noconfirm - <./.extra/req.pacman
     yay -S --needed --noconfirm - <./.extra/req.aur
-    
-    sudo pacman -Syyu --noconfirm
-    sudo yay -Syyu --noconfirm
-  else
-    echo "Unsupported distro: $distro"
-    exit 1
   fi
 
   # Install gui packages
   if [ "$gui" ]; then
-    if [ "$distro" == "manjaro" ]; then
-      echo "Installing GUI aur"
-      sudo pacman -S --needed --noconfirm - <./.extra/req.pacman.gui
-      yay -S --needed --noconfirm - <./.extra/req.aur.gui
-    fi
+    echo "Installing GUI packages"
+    sudo pacman -S --needed --noconfirm - <./.extra/req.pacman.gui
+    yay -S --needed --noconfirm - <./.extra/req.aur.gui
   fi
-fi
 
-# Install hyprland
-if [ "$hyprland" ]; then
-  echo "Installing Hyperland and dependencies"
-  sudo pacman -S --needed --noconfirm - <./.extra/req.pacman.hypr
-  yay -S --needed --noconfirm - <./.extra/req.aur.hypr
+  # Install hyprland
+  if [ "$hyprland" ]; then
+    echo "Installing Hyperland and dependencies"
+    sudo pacman -S --needed --noconfirm - <./.extra/req.pacman.hypr
+    yay -S --needed --noconfirm - <./.extra/req.aur.hypr
 
-  # Setup PAM hook (login + SDDM)"
-  sudo sed -i \
-    '/^auth[[:space:]]\+include[[:space:]]\+system-auth/ a auth       optional   pam_gnome_keyring.so' \
-    /etc/pam.d/system-login
+    # Setup PAM hook (login + SDDM)"
+    sudo sed -i \
+      '/^auth[[:space:]]\+include[[:space:]]\+system-auth/ a auth       optional   pam_gnome_keyring.so' \
+      /etc/pam.d/system-login
 
-  sudo sed -i \
-    '/^session[[:space:]]\+include[[:space:]]\+system-auth/ a session    optional   pam_gnome_keyring.so auto_start' \
-    /etc/pam.d/system-login
+    sudo sed -i \
+      '/^session[[:space:]]\+include[[:space:]]\+system-auth/ a session    optional   pam_gnome_keyring.so auto_start' \
+      /etc/pam.d/system-login
+  fi
+else
+  echo "Unsupported distro: $distro"
+  exit 1
 fi
 
 # Non distro specific
@@ -68,9 +68,13 @@ if [ "$install" ]; then
   echo "Installation Complete!"
 fi
 
-# Setup systemd services
-sudo cp -TR ./systemd /etc/systemd/system/
 # Setup dotfiles
 cp -TR ./.home ~/
+
+# Remove 1password agent from services if disabled
+if ! [ "$onepassword" ]; then
+  sed -i '/^\[gpg "ssh"\]$/,+1d' ~/.gitconfig
+  sed -i '/^export SSH_AUTH_SOCK/d' ~/.zshrc
+fi
 
 echo "Install Script Complete!"
