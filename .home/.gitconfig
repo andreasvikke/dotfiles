@@ -4,8 +4,6 @@
 	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIIga+4ccYxARCCnv9TR9k/SpDIFZJeMMvEQq4CQk/aM
 [includeIf "gitdir:~/Documents/av/"]
 	path = ~/Documents/av/.gitconfig
-[includeIf "gitdir:~/Documents/konolico/"]
-	path = ~/Documents/konolico/.gitconfig
 [includeIf "gitdir:~/Documents/ufst/"]
 	path = ~/Documents/ufst/.gitconfig
 [gpg]
@@ -21,14 +19,14 @@
 	editor = vim
 	pager = less -FRSX
 [color]
-    branch = auto
-    diff = auto
-    status = auto
+  branch = auto
+  diff = auto
+  status = auto
 [alias]
 	a = add -A
-    s = status -s
+  s = status -s
 	co = checkout
-    cob = checkout -b
+  cob = checkout -b
 	cm = commit -m
 	rbi = rebase --interactive
 	f = fetch
@@ -39,7 +37,7 @@
 	pub = "!git push -u origin $(git branch-name)"
 	subpull = submodule update --init --checkout --recursive
 	wipr = for-each-ref --sort='committerdate:iso8601' --format=' %(color:yellow)%(committerdate:relative)%09%(color:white)%(refname:short)' refs/remotes/origin
-    wip = for-each-ref --sort='committerdate:iso8601' --format=' %(color:yellow)%(committerdate:relative)%09%(color:white)%(refname:short)' refs/heads/
+   wip = for-each-ref --sort='committerdate:iso8601' --format=' %(color:yellow)%(committerdate:relative)%09%(color:white)%(refname:short)' refs/heads/
 	ls = log --oneline
 [filter "tabspace"]
 	clean = expand --tabs=4 --initial

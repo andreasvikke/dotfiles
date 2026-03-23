@@ -30,18 +30,13 @@ export PATH="$PATH:$HOME/.bin"
 export PATH="$PATH:$HOME/bin"
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:/usr/local/go/bin"
-export PATH="$PATH:$HOME/bin/google-cloud-sdk/bin"
 export PATH="$PATH:${KREW_ROOT:-$HOME/.krew}/bin"
 
 # ===================================
 # === Setup Application specifics ===
 # ===================================
 export SSH_AUTH_SOCK="$HOME/.1password/agent.sock"     # 1password ssh agent
-export EDITOR=/usr/bin/vim                             # default editor
+export EDITOR=/usr/bin/nvim                            # default editor
+export KUBECONFIG=./.kube/config                       # default kube config to current folder
 eval "$(direnv hook zsh)"                              # direnv hook
-
-export USE_GKE_GCLOUD_AUTH_PLUGIN=True
-if [ -f "$HOME/bin/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/bin/google-cloud-sdk/path.zsh.inc"; fi             # Updates PATH for the Google Cloud SDK.
-if [ -f "$HOME/bin/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/bin/google-cloud-sdk/completion.zsh.inc"; fi # Enables shell command completion for gcloud.
-
 eval "$(starship init zsh)"

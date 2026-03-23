@@ -4,28 +4,13 @@
 alias thcr='cd ~/Documents/thcr'
 alias konolico='cd ~/Documents/konolico'
 alias av='cd ~/Documents/av'
+alias ufst='cd ~/Documents/ufst'
 
 # ===============
 # === Helpers ===
 # ===============
 alias c='clear'
 alias ls='ls -A'
-
-# Kube config Move/Replace alias
-km() { # $1 new file to use
-    current=$(cat ~/.kube/current)
-    mv ~/.kube/config ~/.kube/config.$current
-    mv ~/.kube/config.$1 ~/.kube/config
-    echo $1 > ~/.kube/current
-}
-
-# Talos Cofnig Move/Replace alias
-tm() { # $1 new file to use
-    current=$(cat ~/.talos/current)
-    mv ~/.talos/config ~/.talos/config.$current
-    mv ~/.talos/config.$1 ~/.talos/config
-    echo $1 > ~/.talos/current
-}
 
 swiss() { # $1 node to use
   if [ -n "$1" ]; then
@@ -48,11 +33,7 @@ alias k='kubectl'
 alias kn='kubens'
 alias kubectl='kubecolor'
 alias kx='kubectx'
-alias less='bat --theme=Nord'
+alias less='bat'
 alias ls='exa -la'
-alias lux='~/luxafor'
 alias tf='tfswitch && terraform'
 alias find='fd'
-asl() {
-    aws sso login --profile $1; export AWS_PROFILE=$1
-}

@@ -20,9 +20,12 @@ helm
 iwd
 jq
 kubectx
+lazygit
+nvim
 otf-firamono-nerd
 pre-commit
 procps-ng
+ripgrep
 sshuttle
 starship
 superfile
@@ -37,4 +40,4 @@ wget
 yay
 zsh
 zstd
-ripgrep
+

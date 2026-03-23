@@ -1,12 +1,12 @@
 #!/bin/bash
 set -e
 
-while getopts igmh flag; do
+while getopts igmhp flag; do
   case "${flag}" in
   i) install=true ;;     # Install CLI applications
   g) gui=true ;;         # Install GUI applications
   h) hyprland=true ;;    # Install hyprland as window manage
-  p) onepassword=true ;; # Setup 1Password as SSH Agent
+  p) onepassword=true ;; # Remove 1Password as SSH Agent
   esac
 done
 
@@ -18,10 +18,11 @@ if [ "$distro" == "arch" ]; then
     echo "Installing CLI packages"
     sudo pacman-mirrors -c Denmark
     sudo pacman -Syyu --noconfirm
-    yay -Syyu --noconfirm
 
     sudo pacman -S --needed --noconfirm - <./.extra/req.pacman
     yay -S --needed --noconfirm - <./.extra/req.aur
+
+    yay -Syyu --noconfirm
   fi
 
   # Install gui packages
@@ -62,9 +63,6 @@ if [ "$install" ]; then
   sudo ufw default deny incoming
   sudo ufw default allow outgoing
 
-  sudo mkdir -p /etc/docker
-  echo '{"iptables":false}' | sudo tee /etc/docker/daemon.json
-
   echo "Installation Complete!"
 fi
 
@@ -72,7 +70,7 @@ fi
 cp -TR ./.home ~/
 
 # Remove 1password agent from services if disabled
-if ! [ "$onepassword" ]; then
+if [ "$onepassword" ]; then
   sed -i '/^\[gpg "ssh"\]$/,+1d' ~/.gitconfig
   sed -i '/^export SSH_AUTH_SOCK/d' ~/.zshrc
 fi
