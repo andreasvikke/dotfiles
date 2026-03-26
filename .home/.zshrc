@@ -23,6 +23,13 @@ if [ -f ~/.aliasrc ]; then
   source ~/.aliasrc
 fi
 
+# =======================
+# === Load Extra File ===
+# =======================
+if [ -f ~/.extrarc ]; then
+  source ~/.extrarc
+fi
+
 # ==================
 # === Setup PATH ===
 # ==================
