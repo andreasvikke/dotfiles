@@ -7,9 +7,6 @@ ca-certificates
 curl
 dagger
 direnv
-docker
-docker-buildx
-docker-compose
 exa
 fd
 file
@@ -23,6 +20,7 @@ kubectx
 lazygit
 nvim
 otf-firamono-nerd
+podman
 pre-commit
 procps-ng
 ripgrep
@@ -40,4 +38,7 @@ wget
 yay
 zsh
 zstd
-
+yubikey-manager
+ccid
+pcsclite
+cosign
