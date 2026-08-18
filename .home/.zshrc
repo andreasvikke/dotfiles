@@ -16,6 +16,11 @@ bindkey '^r' zaw-history
 # CTRL-B will pull up zaw-git-branches which will search your current git branches and switch (git checkout) to the branch you select when you hit enter.
 bindkey '^b' zaw-git-branches
 
+# ===========================
+# === Load Auto Comletion ===
+# ===========================
+source <(kubectl completion zsh)
+
 # =======================
 # === Load Alias File ===
 # =======================
